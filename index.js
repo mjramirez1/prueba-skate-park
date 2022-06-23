@@ -59,22 +59,34 @@ app.get('/Admin', async (req, res) => {
 
 
 // Escribe datos  faltas parametros - dudas sobre uploading file - no funciona aun...
-app.post('/usuarios', async (req, res) => {
+app.post('/Registro', async (req, res) => {
     const { email, nombre, password, anos_experiencia, especialidad } = req.body
+    console.log(req.body)
     try {
         const data = await nuevoUsuario(email, nombre, password, anos_experiencia, especialidad)
         res.status(201).send(JSON.stringify(data))
-
-        res.render('Registro')
+    } catch (error) {
+        res.status(500).send({
+            error: `Algo salio mal ... ${error}`,
+            code: 500
+        })
+    }
+})
+/*
+app.post('/Registro', async (req, res) => {
+    try {
+        const { imagen } = req.files
+        imagen.mv(`${__dirname}/public/img/${imagen.name}`, (err) => {
+            res.send('archivo subido')
+        }
+        )
     } catch (error) {
         return res.status(500).send({
             error: `Algo salio mal ... ${error}`,
             code: 500
         })
-
     }
-
-})
+})*/
 
 // valida usuarios en vista admin
 app.put('/Registro', async (req, res) => {
@@ -92,8 +104,8 @@ app.put('/Registro', async (req, res) => {
     }
 
 })
-// verficacion del login
-app.post('/verify', async (req, res) => {
+// verficacion del login 
+app.post('Login/verify', async (req, res) => {
     const { email, password } = req.body
     const user = await getUsuario(email, password)
     if (user) {
@@ -105,9 +117,9 @@ app.post('/verify', async (req, res) => {
             SecretKey
         }
         res.send(token)
-    } else{
+    } else {
         res.status(404).send({
-            error:'El usuario no existe',
+            error: 'El usuario no existe',
             code: 404
         })
     }

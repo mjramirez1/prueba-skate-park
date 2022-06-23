@@ -24,15 +24,15 @@ td div {
 }
 
 tbody tr:nth-child(1) td div {
-    background-image: url("/tony.jpg");
+    background-image: url("/assets/img/tony.jpg");
 }
 
 tbody tr:nth-child(2) td div {
-    background-image: url("/Evelien.jpg");
+    background-image: url("/assets/img/Evelien.jpg");
 }
 
 tbody tr:nth-child(3) td div {
-    background-image: url("/Danny.jpg");
+    background-image: url("/assets/img/Danny.jpg");
 }
 
 input {

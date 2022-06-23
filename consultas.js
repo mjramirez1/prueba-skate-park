@@ -7,11 +7,11 @@ const pool = new Pool({
     port: 5432,
 })
 
-async function nuevoUsuario(email, nombre, password, anos_experiencia, especialidad) {
+async function nuevoUsuario(email, nombre, password, anos_experiencia, especialidad, foto) {
     try {
         const sqlQuery = {
-            text: 'INSERT INTO skaters (email, nombre, password, anos_experiencia, especialidad) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            values: [email, nombre, password, anos_experiencia, especialidad]
+            text: 'INSERT INTO skaters (email, nombre, password, anos_experiencia, especialidad, foto) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            values: [email, nombre, password, anos_experiencia, especialidad, foto]
         }
         const result = await pool.query(sqlQuery)
         return result.rows[0]
