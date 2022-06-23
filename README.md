@@ -1,36 +1,18 @@
-# prueba-skate-park
+# Prueba Skate Park
 
+## Requerimientos
 
-  <script>
-    $('button').click(async (event) => {
-      console.log('hola')
-      event.preventDefault()
-      const email = $('#email').val()
-      const nombre = $('#nombre').val()
-      const password = $('#password').val()
-      const repitaPassword = $('#repitaPassword').val()
-      const experiencia = $('#experiencia').val()
-      const especialidad = $('#especialidad').val()
-      const foto = $('#foto').val()
-      console.log(email, nombre, password, repitaPassword, experiencia, especialidad, foto)
+1. Crear una API REST con el Framework Express (3 Puntos)
+2. Servir contenido dinámico con express-handlebars (3 Puntos)
+3. Ofrecer la funcionalidad Upload File con express-fileupload (2 Puntos)
+4. Implementar seguridad y restricción de recursos o contenido con JWT (2 Puntos)
 
-      const payload = { email, nombre, password, repitaPassword, experiencia, especialidad, foto }
-      const FormData = require('form-data')
-      const form = document.querySelector("formularioRegistro")
-      const formulario = new FormData(form)
+## Dependencias y versionamientos
 
-      try {
-        await axios.post('/Registro', formulario, {
-          Headers: {
-            "Content-Type": "multipart/form-data" 
-          }
-        })
-        alert('Usuario registrado con éxito')
-        window.location.href = '/Login'
-      }
-      catch (error) {
-        alert(error.message)
-      }
-
-    })
-  </script>
+- bootstrap: 5.1.3
+- expres: 4.18.1
+- express-fileupload: 1.4.0
+- express-handlebars: 6.0.6
+- jsonwebtoken: 8.5.1
+- nodemon: 2.0.16
+- pg: 8.7.3i
