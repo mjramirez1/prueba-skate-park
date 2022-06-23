@@ -28,7 +28,6 @@ app.engine(
     }))
 app.set('view engine', 'hbs')
 
-
 // Rutas
 app.get('/', function (req, res) {
     res.render('Index', { title: 'Inicio' })
@@ -57,14 +56,23 @@ app.get('/Admin', async (req, res) => {
     }
 })
 
-
 // Escribe datos  faltas parametros - dudas sobre uploading file - no funciona aun...
 app.post('/Registro', async (req, res) => {
     const { email, nombre, password, anos_experiencia, especialidad } = req.body
-    console.log(req.body)
+    const { foto } = req.files
     try {
-        const data = await nuevoUsuario(email, nombre, password, anos_experiencia, especialidad)
-        res.status(201).send(JSON.stringify(data))
+        foto.mv(`${__dirname}/public/assets/img/${foto.name}`, async (err) => {
+            if (err) {
+                return res.status(500).send({
+                    error: `Algo salio mal ${err}`,
+                    code: 500
+                })
+            } else {
+                const data = await nuevoUsuario(email, nombre, password, anos_experiencia, especialidad, foto.name)
+                res.status(201).send(JSON.stringify(data))
+            }
+        })
+
     } catch (error) {
         res.status(500).send({
             error: `Algo salio mal ... ${error}`,
